@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+
+    <style>
+        .searchable-select {
+            position: relative;
+            display: inline-block;
+        }
+
+        .searchable-select input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+
+        .searchable-select ul {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+            background: #fff;
+            z-index: 1000;
+        }
+
+        .searchable-select li {
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .searchable-select li:hover {
+            background: #f0f0f0;
+        }
+    </style>
+    <div class="p-8">
+        <h1 class="text-2xl font-bold mb-6">Select Players to Compare</h1>
+        <form action="/compare" method="post">
+            <div class="space-x-4 grid grid-cols-2">
+                <div class="searchable-select mb-4">
+                    <label for="player1" class="block text-sm font-medium text-gray-700">Player 1:</label>
+                    <input type="text" id="player1-search" placeholder="Search Player 1">
+                    <ul id="player1-list" class="hidden"></ul>
+                    <input type="hidden" name="player1" id="player1">
+                </div>
+                <div class="searchable-select mb-4">
+                    <label for="player2" class="block text-sm font-medium text-gray-700">Player 2:</label>
+                    <input type="text" id="player2-search" placeholder="Search Player 2">
+                    <ul id="player2-list" class="hidden"></ul>
+                    <input type="hidden" name="player2" id="player2">
+                </div>
+            </div>
+            <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Compare
+            </button>
+        </form>
+
+    </div>
+
+    <script>
+        const _players = {{ players| tojson }};
+        function setupSearch(inputId, listId, hiddenInputId) {
+            const input = document.getElementById(inputId);
+            const list = document.getElementById(listId);
+            const hiddenInput = document.getElementById(hiddenInputId);
+
+            input.addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+                list.innerHTML = '';
+
+                if (query) {
+                    const filteredPlayers = _players.filter(player => player.toLowerCase().includes(query));
+                    filteredPlayers.forEach(player => {
+                        const li = document.createElement('li');
+                        li.textContent = player;
+                        li.addEventListener('click', function () {
+                            input.value = this.textContent;
+                            hiddenInput.value = this.textContent;
+                            list.classList.add('hidden');
+                        });
+                        list.appendChild(li);
+                    });
+                    list.classList.remove('hidden');
+                } else {
+                    list.classList.add('hidden');
+                }
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!input.contains(event.target)) {
+                    list.classList.add('hidden');
+                }
+            });
+        }
+
+        setupSearch('player1-search', 'player1-list', 'player1');
+        setupSearch('player2-search', 'player2-list', 'player2');
+    </script>
+</div>
+{% endblock %}

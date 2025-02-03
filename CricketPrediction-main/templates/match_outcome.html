@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Cricket Match Outcome Predictor</h1>
+
+    <p class="text-gray-600 mb-6 text-center">Enter the match details below to predict the outcome based on historical
+        data.</p>
+
+    <form method="POST" class="space-y-6">
+        <div class="mb-4">
+            <label for="toss_decision" class="block text-gray-700 text-lg font-semibold mb-2">Toss Decision:</label>
+            <select id="toss_decision" name="toss_decision"
+                class="py-2 px-2 border form-select block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+                <option value="Bat">Bat</option>
+                <option value="Bowl">Bowl</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="matches_played" class="block text-gray-700 text-lg font-semibold mb-2">Matches Played:</label>
+            <input type="number" id="matches_played" name="matches_played"
+                class="form-input py-2 px-2 border block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+        </div>
+        <div class="mb-4">
+            <label for="runs_scored" class="block text-gray-700 text-lg font-semibold mb-2">Runs Scored:</label>
+            <input type="number" id="runs_scored" name="runs_scored"
+                class="form-input py-2 px-2 border block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+        </div>
+        <div class="mb-4">
+            <label for="wickets_taken" class="block text-gray-700 text-lg font-semibold mb-2">Wickets Taken:</label>
+            <input type="number" id="wickets_taken" name="wickets_taken"
+                class="form-input py-2 px-2 border block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+        </div>
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            Predict Outcome
+        </button>
+    </form>
+
+    {% if prediction %}
+    <div class="mt-8 text-center">
+        <h2 class="text-2xl font-semibold text-gray-800">Predicted Match Outcome:</h2>
+        <p class="text-xl text-gray-600 mt-2">{{ prediction }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

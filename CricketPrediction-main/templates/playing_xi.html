@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Select Playing XI</h1>
+
+    <p class="text-gray-600 mb-6 text-center">Enter the team and format to get the best playing XI prediction.</p>
+
+    <form method="POST" class="space-y-6">
+        <div class="mb-4">
+            <label for="team_name" class="block text-gray-700 text-lg font-semibold mb-2">Team Name:</label><select
+                id="team_name" name="team_name"
+                class="px-2 py-2 border form-input block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Andorra">Andorra</option>
+                <option value="Australia">Australia</option>
+                <option value="Austria">Austria</option>
+                <option value="Bahamas">Bahamas</option>
+                <option value="Bahrain">Bahrain</option>
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="Barbados">Barbados</option>
+                <option value="Belgium">Belgium</option>
+                <option value="Bermuda">Bermuda</option>
+                <option value="Bulgaria">Bulgaria</option>
+                <option value="Canada">Canada</option>
+                <option value="Cayman Islands">Cayman Islands</option>
+                <option value="Chinese Taipei">Chinese Taipei</option>
+                <option value="Cook Islands">Cook Islands</option>
+                <option value="Croatia">Croatia</option>
+                <option value="Cyprus">Cyprus</option>
+                <option value="Czech Republic">Czech Republic</option>
+                <option value="Denmark">Denmark</option>
+                <option value="England">England</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Europe">Europe</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="Germany">Germany</option>
+                <option value="Gibraltar">Gibraltar</option>
+                <option value="Greece">Greece</option>
+                <option value="Grenada">Grenada</option>
+                <option value="Guernsey">Guernsey</option>
+                <option value="Hong Kong">Hong Kong</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Iceland">Iceland</option>
+                <option value="India">India</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="Ireland Republic">Ireland Republic</option>
+                <option value="Isle of Man">Isle of Man</option>
+                <option value="Italy">Italy</option>
+                <option value="Japan">Japan</option>
+                <option value="Jersey">Jersey</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Kuwait">Kuwait</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Maldives">Maldives</option>
+                <option value="Malta">Malta</option>
+                <option value="Namibia">Namibia</option>
+                <option value="Nepal">Nepal</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Norway">Norway</option>
+                <option value="Oman">Oman</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="Palestine">Palestine</option>
+                <option value="Papua New Guinea">Papua New Guinea</option>
+                <option value="Philippines">Philippines</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Qatar">Qatar</option>
+                <option value="Republic of Ireland">Republic of Ireland</option>
+                <option value="Romania">Romania</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="Samoa">Samoa</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Scotland">Scotland</option>
+                <option value="Serbia">Serbia</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Slovakia">Slovakia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Spain">Spain</option>
+                <option value="Sri Lanka">Sri Lanka</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Turkey">Turkey</option>
+                <option value="USA">USA</option>
+                <option value="Uganda">Uganda</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="Vanuatu">Vanuatu</option>
+                <option value="Wales">Wales</option>
+                <option value="West Indies">West Indies</option>
+                <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+
+        </div>
+        <div class="mb-4">
+            <label for="format_name" class="block text-gray-700 text-lg font-semibold mb-2">Match Format:</label>
+            <input type="text" id="format_name" name="format_name"
+                class="px-2 py-2 border form-input block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                required>
+        </div>
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+            Get Playing XI
+        </button>
+    </form>
+
+    {% if prediction %}
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Predicted Playing XI:</h2>
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player
+                        Name
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Primary
+                        Role
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for player in prediction %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ player['Player Name'] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ player['Primary Role'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

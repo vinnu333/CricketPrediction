@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Performance Predictor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+
+    <div class="mx-auto flex">
+        {% include 'side_nav.html' %}
+
+        <div class="min-h-screen bg-cover bg-center flex items-center" 
+            style="background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/09/4e/e4/ff/chepauk-stadium.jpg');">
+            <div class="p-6">
+                <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Cricket Prediction</h1>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Compare Players -->
+                    <div
+                        class="bg-blue-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <a href="/compare" class="block p-6 text-center">
+                            <img class="w-16 h-16 mx-auto mb-4" src="https://img.icons8.com/color/48/000000/compare.png"
+                                alt="Compare Icon">
+                            <h2 class="text-xl font-semibold text-gray-800">Compare Players</h2>
+                            <p class="text-gray-600">Compare statistics between different players.</p>
+                        </a>
+                    </div>
+
+                    <!-- Batting & Bowling -->
+                    <div
+                        class="bg-green-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <a href="/batting-bowling" class="block p-6 text-center">
+                            <img class="w-16 h-16 mx-auto mb-4" src="https://img.icons8.com/color/48/000000/cricket.png"
+                                alt="Cricket Icon">
+                            <h2 class="text-xl font-semibold text-gray-800">Batting & Bowling</h2>
+                            <p class="text-gray-600">Analyze batting and bowling performances.</p>
+                        </a>
+                    </div>
+
+                    <!-- Primary Role -->
+                    <div
+                        class="bg-red-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <a href="/primary-role" class="block p-6 text-center">
+                            <img class="w-16 h-16 mx-auto mb-4"
+                                src="https://img.icons8.com/?size=100&id=nU3xgaV2IKwS&format=png&color=000000"
+                                alt="Role Icon">
+                            <h2 class="text-xl font-semibold text-gray-800">Primary Role</h2>
+                            <p class="text-gray-600">Filter players by their primary role.</p>
+                        </a>
+                    </div>
+
+                    <!-- Match Outcome -->
+                    <div
+                        class="bg-yellow-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <a href="/match-outcome" class="block p-6 text-center">
+                            <img class="w-16 h-16 mx-auto mb-4" src="https://img.icons8.com/color/48/000000/trophy.png"
+                                alt="Match Icon">
+                            <h2 class="text-xl font-semibold text-gray-800">Match Outcome</h2>
+                            <p class="text-gray-600">Predict the outcome of matches.</p>
+                        </a>
+                    </div>
+
+                    <!-- Playing XI -->
+                    <div
+                        class="bg-pink-100 shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                        <a href="/playing-xi" class="block p-6 text-center">
+                            <img class="w-16 h-16 mx-auto mb-4"
+                                src="https://img.icons8.com/?size=100&id=9kE6uvLgRqEE&format=png&color=000000"
+                                alt="Playing XI Icon">
+                            <h2 class="text-xl font-semibold text-gray-800">Playing XI</h2>
+                            <p class="text-gray-600">View the predicted playing XI for upcoming matches.</p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

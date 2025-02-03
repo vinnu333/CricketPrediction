@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Comparison Results</h1>
+
+    {% if error %}
+    <p class="text-red-600 mb-4">{{ error }}</p>
+    {% else %}
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ player1 }} vs {{ player2 }}</h2>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ player1 }} Stats</h3>
+        <p class="text-gray-600 mb-4">Here you can view the detailed statistics of {{ player1 }} compared to {{
+            player2
+            }}.</p>
+
+        <div class="overflow-x-auto">
+            <table class="w-full table-auto border-collapse border border-gray-300">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-4 py-2 text-left">Statistic</th>
+                        <th class="border border-gray-300 px-4 py-2">{{ player1 }}</th>
+                        <th class="border border-gray-300 px-4 py-2">{{ player2 }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stat in player1_stats %}
+                    <tr class="bg-white even:bg-gray-50">
+                        <td class="border border-gray-300 px-4 py-2">{{ stat }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ player1_stats[stat] }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ player2_stats[stat] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if player1_img %}
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ player1 }} Visualization</h3>
+            <img src="data:image/png;base64,{{ player1_img }}" alt="{{ player1 }} Stats"
+                class="w-full max-w-md mx-auto rounded-lg shadow-md">
+        </div>
+        {% else %}
+        <p class="text-gray-600">No data available for {{ player1 }}.</p>
+        {% endif %}
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ player2 }} Stats</h3>
+
+        {% if player2_img %}
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ player2 }} Visualization</h3>
+            <img src="data:image/png;base64,{{ player2_img }}" alt="{{ player2 }} Stats"
+                class="w-full max-w-md mx-auto rounded-lg shadow-md">
+        </div>
+        {% else %}
+        <p class="text-gray-600">No data available for {{ player2 }}.</p>
+        {% endif %}
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">PCA Plot</h3>
+
+        {% if pca_img %}
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Principal Component Analysis (PCA) Visualization
+            </h3>
+            <img src="data:image/png;base64,{{ pca_img }}" alt="PCA Plot"
+                class="w-full max-w-md mx-auto rounded-lg shadow-md">
+        </div>
+        {% else %}
+        <p class="text-gray-600">PCA plot could not be generated.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="mt-6">
+        <a href="/compare" class="text-blue-500 hover:underline">Go Back</a>
+    </div>
+</div>
+
+
+{% endblock %}
